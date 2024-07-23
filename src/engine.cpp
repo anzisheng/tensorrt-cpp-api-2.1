@@ -23,17 +23,24 @@ bool Engine::doesFileExist(const std::string &filepath) {
 
 Engine::Engine(const Options &options)
     : m_options(options) {
-    if (!m_options.doesSupportDynamicBatchSize) {
-        std::cout << "Model does not support dynamic batch size, using optBatchSize and maxBatchSize of 1" << std::endl;
-        m_options.optBatchSize = 1;
-        m_options.maxBatchSize = 1;
+    if (!m_options.doesSupportDynamicBatchSize) {        
+        m_options.optBatchSize = 1;         
+        m_options.maxBatchSize = 1;         
     }
+}
+bool Engine::processInput(const samplesCommon::BufferManager& buffers)
+{
+    std::cout << "hello "<<std::endl;
+    
+    return true;
 }
 
 bool Engine::build(std::string onnxModelPath) {
     // Only regenerate the engine file if it has not already been generated for the specified options
     m_engineName = serializeEngineOptions(m_options);
+    std::cout << m_engineName << std::endl; 
     std::cout << "Searching for engine file with name: " << m_engineName << std::endl;
+
 
     if (doesFileExist(m_engineName)) {
         std::cout << "Engine found, not regenerating..." << std::endl;
@@ -47,12 +54,13 @@ bool Engine::build(std::string onnxModelPath) {
     // Was not able to find the engine file, generate...
     std::cout << "Engine not found, generating..." << std::endl;
 
+    std::cout << " generating begin..." << std::endl;
     // Create our engine builder.
     auto builder = std::unique_ptr<nvinfer1::IBuilder>(nvinfer1::createInferBuilder(m_logger));
     if (!builder) {
         return false;
     }
-
+    std::cout << " generating end..." << std::endl;
     // Set the max supported batch size
     builder->setMaxBatchSize(m_options.maxBatchSize);
 

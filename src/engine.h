@@ -1,5 +1,5 @@
 #pragma once
-
+#include "buffers.h"
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/cuda.hpp>
 #include <opencv2/cudawarping.hpp>
@@ -40,6 +40,12 @@ public:
     ~Engine();
     // Build the network
     bool build(std::string onnxModelPath);
+    // //handle multiple inputs
+    // void processInput(const samplesCommon::BufferManager& buffers);
+    //!
+    //! \brief Reads the input  and stores the result in a managed buffer
+    //!
+    bool processInput(const samplesCommon::BufferManager& buffers);
     // Load and prepare the network for inference
     bool loadNetwork();
     // Run inference.
@@ -50,7 +56,7 @@ public:
     static cv::cuda::GpuMat resizeKeepAspectRatioPadRightBottom(const cv::cuda::GpuMat& input, size_t newDim, const cv::Scalar& bgcolor = cv::Scalar(0, 0, 0));
 
     const std::vector<nvinfer1::Dims3>& getInputDims() const { return m_inputDims; };
-private:
+//private:
     // Converts the engine options into a string
     std::string serializeEngineOptions(const Options& options);
 
@@ -63,7 +69,8 @@ private:
     std::vector<uint32_t> m_outputLengthsFloat{};
     std::vector<nvinfer1::Dims3> m_inputDims;
 
-    std::unique_ptr<nvinfer1::ICudaEngine> m_engine = nullptr;
+    //std::unique_ptr<nvinfer1::ICudaEngine> m_engine = nullptr;
+    std::shared_ptr<nvinfer1::ICudaEngine> m_engine = nullptr;
     std::unique_ptr<nvinfer1::IExecutionContext> m_context = nullptr;
     Options m_options;
     Logger m_logger;

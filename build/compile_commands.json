@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/build",
+  "command": "/usr/bin/c++ -Dtensorrt_cpp_api_EXPORTS -I/usr/local/TensorRT-8.6.1.6/include -I/usr/local/TensorRT-8.6.1.6/samples/common -I/usr/local/cuda/include -isystem /usr/local/include/opencv4  -Wall -Ofast -DNDEBUG -Wno-deprecated-declarations -g -std=gnu++17 -fPIC -o CMakeFiles/tensorrt_cpp_api.dir/src/engine.cpp.o -c /home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/src/engine.cpp",
+  "file": "/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/src/engine.cpp",
+  "output": "CMakeFiles/tensorrt_cpp_api.dir/src/engine.cpp.o"
+},
+{
+  "directory": "/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/build",
+  "command": "/usr/bin/c++  -I/usr/local/TensorRT-8.6.1.6/include -I/usr/local/TensorRT-8.6.1.6/samples/common -I/usr/local/cuda/include -isystem /usr/local/include/opencv4  -Wall -Ofast -DNDEBUG -Wno-deprecated-declarations -g -std=gnu++17 -o CMakeFiles/driver.dir/src/main.cpp.o -c /home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/src/main.cpp",
+  "file": "/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/src/main.cpp",
+  "output": "CMakeFiles/driver.dir/src/main.cpp.o"
+}
+]

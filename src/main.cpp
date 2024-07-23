@@ -20,26 +20,38 @@ int main() {
     }
 
     Engine engine(options);
+    std::cout << "create buffer"<<std::endl;
+
+   
 
     // TODO: Specify your model here.
     // Must specify a dynamic batch size when exporting the model from onnx.
     // If model only specifies a static batch size, must set the above variable doesSupportDynamicBatchSize to false.
-    const std::string onnxModelpath = "../models/arcfaceresnet100-8.onnx";
+    const std::string onnxModelpath = "../models/inswapper_128.onnx";//arcfaceresnet100-8.onnx";
 
     bool succ = engine.build(onnxModelpath);
     if (!succ) {
         throw std::runtime_error("Unable to build TRT engine.");
     }
 
+   
+
     succ = engine.loadNetwork();
     if (!succ) {
         throw std::runtime_error("Unable to load TRT engine.");
     }
+      //engine.mEngine->getNbBindings()
+    std::cout << "create :"<<engine.m_engine.get()<<std::endl;
+    std::cout << "create :"<<engine.m_engine->getNbBindings()<<std::endl;
+
+    //Create RAII buffer manager object
+    samplesCommon::BufferManager buffers(engine.m_engine);
+    std::cout << "create buffer222"<<std::endl;
 
     // Let's use a batch size which matches that which we set the Options.optBatchSize option
     size_t batchSize = options.optBatchSize;
 
-    const std::string inputImage = "../inputs/face_chip.jpg";
+    const std::string inputImage = "../inputs/6.jpg";
     auto cpuImg = cv::imread(inputImage);
     if (cpuImg.empty()) {
         throw std::runtime_error("Unable to read image at path: " + inputImage);
@@ -52,10 +64,13 @@ int main() {
     cv::cuda::GpuMat img;
     img.upload(cpuImg);
 
+
     // Populate the input vectors
     const auto& inputDims = engine.getInputDims();
     std::cout << "inputDims" << inputDims.size() << std::endl;
     std::vector<std::vector<cv::cuda::GpuMat>> inputs;
+
+    engine.processInput(buffers);
 
     // TODO:
     // For the sake of the demo, we will be feeding the same image to all the inputs

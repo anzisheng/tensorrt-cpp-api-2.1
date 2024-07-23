@@ -1,0 +1,4 @@
+/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/build/CMakeFiles/tensorrt_cpp_api.dir
+/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/build/CMakeFiles/driver.dir
+/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/build/CMakeFiles/edit_cache.dir
+/home/an/projects/tensorrt_face_sbs/tensorrt-cpp-api-2.1/build/CMakeFiles/rebuild_cache.dir
