@@ -2,6 +2,12 @@
 #include <opencv2/opencv.hpp>
 #include <chrono>
 
+
+processInputs(const samplesCommon::BufferManager& buffers, cv::cuda::GpuMat &GPUimg, vector<fload> &bedding)
+{
+    
+}
+
 typedef std::chrono::high_resolution_clock Clock;
 
 int main() {
@@ -61,8 +67,8 @@ int main() {
     cv::cvtColor(cpuImg, cpuImg, cv::COLOR_BGR2RGB);
 
     // Upload to GPU memory
-    cv::cuda::GpuMat img;
-    img.upload(cpuImg);
+    cv::cuda::GpuMat GPUimg;
+    GPUimg.upload(cpuImg);
 
 
     // Populate the input vectors
@@ -70,7 +76,7 @@ int main() {
     std::cout << "inputDims" << inputDims.size() << std::endl;
     std::vector<std::vector<cv::cuda::GpuMat>> inputs;
 
-    engine.processInput(buffers);
+    processInputs(buffers, GPUimg);
 
     // TODO:
     // For the sake of the demo, we will be feeding the same image to all the inputs

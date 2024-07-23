@@ -6,3 +6,5 @@ trt.engine.NVIDIAGeForceRTX3080.fp16.1.1.4000000000
 build/trt.engine.NVIDIAGeForceRTX3080.fp16.1.1.4000000000
 *.o
 *.make
+
+build/trt*.*
